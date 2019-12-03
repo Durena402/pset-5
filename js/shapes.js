@@ -24,15 +24,15 @@ window.onload = function() {
 /*
  * Exercise 1.
  */
-
 const sayHello = function() {
     // write your exercise 1 code here
+    var ctx = document.getElementById("hello-sample").getContext('2d');
+ctx.font = '48px serif';
+ctx.fillText('Hello world', 10, 50);
 };
-
 /*
  * Exercise 2.
  */
-
 const drawRectangle = function() {
     // write your exercise 2 code here
 };
