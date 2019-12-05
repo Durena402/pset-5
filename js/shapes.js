@@ -26,9 +26,10 @@ window.onload = function() {
  */
 const sayHello = function() {
     // write your exercise 1 code here
-    var ctx = document.getElementById("hello-sample").getContext('2d');
-ctx.font = '48px serif';
-ctx.fillText('Hello world', 10, 50);
+   let message = prompt("Message: ");
+   message = document.getElementById('canvas').getContext('2d');
+   message.font = '48px sans-serif';
+   message.strokeText(" ", 30, 70);
 };
 /*
  * Exercise 2.
