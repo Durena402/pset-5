@@ -19,31 +19,73 @@ window.onload = function() {
     // equivalent set of six event listeners for your solutions. the first one is done for you.
 
     this.document.getElementById("hello").onclick = sayHello;
+    this.document.getElementById("rectangle").onclick = drawRectangle;
+    this.document.getElementById("color").onclick = drawColoredRectangle;
 }
 
 /*
  * Exercise 1.
  */
 const sayHello = function() {
-    // write your exercise 1 code here
-   let message = prompt("Message: ");
-   let ctx = document.getElementById("student-canvas-1").getContext('2d');
+  let canvas = document.getElementById("student-canvas-1")
+  let ctx = canvas.getContext('2d');
+   ctx.clearRect(0, 0, 1024, 128);
+  let message = prompt("Message: ");
+  while (message.length > 50){
+    alert("Your message is too long. Keep it under 50 characters.");
+    message = prompt("Message: ");
+  }
    ctx.font = '48px sans-serif';
-   ctx.strokeText(message, 30, 70, 994);
+   ctx.strokeText(message, 30, 70);
 };
 /*
  * Exercise 2.
  */
 const drawRectangle = function() {
-    // write your exercise 2 code here
+  let canvas = document.getElementById("student-canvas-2")
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 1024, 512);
+  let width = prompt("Width: ");
+  let height = prompt("Height: ");
+  let x = prompt("X: ");
+  let y = prompt("Y: ");
+  while (isNaN(width) || width <= 1 || width >= 1024){
+    alert("Your width must be between 1 and 1024.");
+    width = prompt("Width: ");
+  }
+  while (isNaN(height) || height <= 1 || height >= 512){
+    alert("Your height must be between 1 and 512.");
+    height = prompt("Height: ");
+  }
+  while (isNaN(x) || x < 1 || x >= 1024){
+    alert("Your X is invaid.");
+    x = prompt("X: ");
+  }
+  while (isNaN(y) || y < 1 || y >= 512){
+    alert("Your Y is invaid.");
+    y = prompt("Y: ");
+  }
+  ctx.strokeRect( x, y, width, height);
 };
-
+// figure out the whole in the bounds of canvas thing
 /*
  * Exercise 3.
  */
 
 const drawColoredRectangle = function() {
-    // write your exercise 3 code here
+  let canvas = document.getElementById("student-canvas-3");
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 1024, 512);
+
+  let color = prompt("Color: ");
+  color = color.toLowerCase();
+  color = color.trim();
+  while (color != black || color != blue || color != green || color != orange || color != purple || color  != red || color != yellow){
+    alert("Your color is not valid.");
+    color = prompt("Color: ");
+  }
+  ctx.fillStyle = color
+   ctx.fillRect(10, 10, 100, 50);
 };
 
 /*
