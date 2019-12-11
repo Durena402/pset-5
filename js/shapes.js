@@ -36,7 +36,7 @@ const sayHello = function() {
     message = prompt("Message: ");
   }
    ctx.font = '48px sans-serif';
-   ctx.strokeText(message, 30, 70);
+   ctx.strokeText(message, 30, 70, 994);
 };
 /*
  * Exercise 2.
@@ -49,25 +49,41 @@ const drawRectangle = function() {
   let height = prompt("Height: ");
   let x = prompt("X: ");
   let y = prompt("Y: ");
-  while (isNaN(width) || width <= 1 || width >= 1024){
-    alert("Your width must be between 1 and 1024.");
-    width = prompt("Width: ");
+
+  if (x == null || y == null || width == null || height == null) {
+    ctx.clearRect(0, 0, 1024, 512);
+    return;
   }
-  while (isNaN(height) || height <= 1 || height >= 512){
+
+  while (isNaN(width) || width < 1 || width > 1024 || isNaN(height) || height < 1 || height > 512 || isNaN(x) || x < 1 || x >= 1024 || isNaN(y) || y < 1 || y >= 512 || x + width > 1024 || y + height > 512) {
+    if (x == null || y == null || width == null || height == null) {
+      ctx.clearRect(0, 0, 1024, 512);
+      return;
+    }
+    if (isNaN(width) || width < 1 || width > 1024){
+      alert("Your width must be between 1 and 1024.");
+    }
+    if (isNaN(height) || height < 1 || height > 512){
     alert("Your height must be between 1 and 512.");
-    height = prompt("Height: ");
   }
-  while (isNaN(x) || x < 1 || x >= 1024){
+    if (isNaN(x) || x < 1 || x > 1024){
     alert("Your X is invaid.");
-    x = prompt("X: ");
   }
-  while (isNaN(y) || y < 1 || y >= 512){
+    if (isNaN(y) || y < 1 || y > 512){
     alert("Your Y is invaid.");
-    y = prompt("Y: ");
   }
+  if (x + width > 1024 || y + height > 512){
+    alert("Your rectangle is out of the bounds of the canvas.")
+  }
+
+   width = prompt("Width: ");
+   height = prompt("Height: ");
+   x = prompt("X: ");
+   y = prompt("Y: ");
+ }
   ctx.strokeRect( x, y, width, height);
 };
-// figure out the whole in the bounds of canvas thing
+// Something is wrong
 /*
  * Exercise 3.
  */
@@ -80,7 +96,7 @@ const drawColoredRectangle = function() {
   let color = prompt("Color: ");
   color = color.toLowerCase();
   color = color.trim();
-  while (color != black || color != blue || color != green || color != orange || color != purple || color  != red || color != yellow){
+  while (color != "black" && color != "blue" && color && "green" != color != "orange" && color != "purple" && color != "red" && color != "yellow"){
     alert("Your color is not valid.");
     color = prompt("Color: ");
   }
