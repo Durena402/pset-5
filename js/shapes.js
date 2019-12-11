@@ -50,12 +50,7 @@ const drawRectangle = function() {
   let x = prompt("X: ");
   let y = prompt("Y: ");
 
-  if (x == null || y == null || width == null || height == null) {
-    ctx.clearRect(0, 0, 1024, 512);
-    return;
-  }
-
-  while (isNaN(width) || width < 1 || width > 1024 || isNaN(height) || height < 1 || height > 512 || isNaN(x) || x < 1 || x >= 1024 || isNaN(y) || y < 1 || y >= 512 || x + width > 1024 || y + height > 512) {
+  while (isNaN(width) || width < 1 || width > 1024 || isNaN(height) || height < 1 || height > 512 || isNaN(x) || x < 1 || x >= 1024 || isNaN(y) || y < 1 || y >= 512 ||  x > 1024 - width || y > 512 -  height) {
     if (x == null || y == null || width == null || height == null) {
       ctx.clearRect(0, 0, 1024, 512);
       return;
@@ -64,17 +59,17 @@ const drawRectangle = function() {
       alert("Your width must be between 1 and 1024.");
     }
     if (isNaN(height) || height < 1 || height > 512){
-    alert("Your height must be between 1 and 512.");
-  }
+      alert("Your height must be between 1 and 512.");
+    }
     if (isNaN(x) || x < 1 || x > 1024){
-    alert("Your X is invaid.");
-  }
+      alert("Your X is invaid.");
+    }
     if (isNaN(y) || y < 1 || y > 512){
-    alert("Your Y is invaid.");
-  }
-  if (x + width > 1024 || y + height > 512){
-    alert("Your rectangle is out of the bounds of the canvas.")
-  }
+      alert("Your Y is invaid.");
+    }
+    if ( x > 1024 - width || y > 512 -  height){
+      alert("Your rectangle is out of the bounds of the canvas.");
+    }
 
    width = prompt("Width: ");
    height = prompt("Height: ");
@@ -96,7 +91,7 @@ const drawColoredRectangle = function() {
   let color = prompt("Color: ");
   color = color.toLowerCase();
   color = color.trim();
-  while (color != "black" && color != "blue" && color && "green" != color != "orange" && color != "purple" && color != "red" && color != "yellow"){
+  while (color !== "black" && color !== "blue" && color !== "green" && color !== "orange" && color !== "purple" && color !== "red" && color !== "yellow"){
     alert("Your color is not valid.");
     color = prompt("Color: ");
   }
