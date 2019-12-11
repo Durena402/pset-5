@@ -21,13 +21,14 @@ window.onload = function() {
     this.document.getElementById("hello").onclick = sayHello;
     this.document.getElementById("rectangle").onclick = drawRectangle;
     this.document.getElementById("color").onclick = drawColoredRectangle;
+    this.document.getElementById("triangle").onclick = drawTriangle;
 }
 
 /*
  * Exercise 1.
  */
 const sayHello = function() {
-  let canvas = document.getElementById("student-canvas-1")
+  let canvas = document.getElementById("student-canvas-1");
   let ctx = canvas.getContext('2d');
    ctx.clearRect(0, 0, 1024, 128);
   let message = prompt("Message: ");
@@ -42,7 +43,7 @@ const sayHello = function() {
  * Exercise 2.
  */
 const drawRectangle = function() {
-  let canvas = document.getElementById("student-canvas-2")
+  let canvas = document.getElementById("student-canvas-2");
   let ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, 1024, 512);
   let width = prompt("Width: ");
@@ -104,9 +105,49 @@ const drawColoredRectangle = function() {
  */
 
 const drawTriangle = function() {
-    // write your exercise 4 code here
-};
+  let canvas = document.getElementById("student-canvas-4");
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 1024, 512);
 
+  let sideOne = prompt("Side 1: ");
+  let sideTwo = prompt("Side 2: ");
+  let sideThree = prompt("Side 3: ");
+
+  while ( isNaN(sideOne) || sideOne > 1024 || sideOne < 1 || isNaN(sideTwo) ||  sideTwo > 1024 || sideTwo< 1 || isNaN(sideThree) || sideThree > 1024 || sideThree< 1){
+
+      if (sideOne == null || sideTwo == null || sideThree == null) {
+        ctx.clearRect(0, 0, 1024, 512);
+        return;
+      }
+      if (isNaN(sideOne) || isNaN(sideTwo) || isNaN(sideThree)){
+        alert("One of your sides is not a number.")
+      } else {
+        alert("One of your sides is invalid.")
+      }
+      sideOne = prompt("Side 1: ");
+      sideTwo = prompt("Side 2: ");
+      sideThree = prompt("Side 3: ");
+    }
+
+ let hypotenuse = Math.max(sideOne , sideTwo , sideThree);
+ let height = Math.min(sideOne , sideTwo , sideThree);
+ let base = Math.sqrt((hypotenuse * hypotenuse) - (height * height))
+
+  if ( base > 1024 || height > 512 || hypotenuse > 1144 ){
+    alert("Your triangle won't fit on the canvas")
+  }
+  if ((height ** 2) + (base ** 2) == (hypotenuse ** 2)) {
+    ctx.beginPath();
+    ctx.moveTo(25, 25);
+    ctx.lineTo(25, height + 25);
+    ctx.lineTo(base + 25, height + 25);
+    ctx.closePath();
+    ctx.stroke();
+  } else {
+    alert("That's not a valid right triangle.")
+  }
+
+};
 /*
  * Exercise 5.
  */
