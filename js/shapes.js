@@ -23,6 +23,7 @@ window.onload = function() {
     this.document.getElementById("color").onclick = drawColoredRectangle;
     this.document.getElementById("triangle").onclick = drawTriangle;
     this.document.getElementById("face").onclick = drawFace;
+    this.document.getElementById("pyramid").onclick = drawPyramid;
 }
 
 /*
@@ -119,17 +120,21 @@ const drawTriangle = function() {
     let sideTwo = prompt("Side 2: ");
     let sideThree = prompt("Side 3: ");
 
-    while ( isNaN(sideOne) || sideOne > 1024 || sideOne < 1 || isNaN(sideTwo) ||  sideTwo > 1024 || sideTwo< 1 || isNaN(sideThree) || sideThree > 1024 || sideThree< 1){
+    while ( isNaN(sideOne) || sideOne > 1024 || sideOne < 1 || isNaN(sideTwo) ||  sideTwo > 1024 || sideTwo < 1 || isNaN(sideThree) || sideThree > 1024 || sideThree < 1 || (sideOne == sideTwo && sideTwo == sideThree)){
 
         if (sideOne == null || sideTwo == null || sideThree == null) {
           ctx.clearRect(0, 0, 1024, 512);
           return;
         }
+
         if (isNaN(sideOne) || isNaN(sideTwo) || isNaN(sideThree)){
-          alert("One of your sides is not a number.")
+          alert("One of your sides is not a number.");
+        } else if (sideOne == sideTwo && sideTwo == sideThree){
+          alert("Your triangle is invalid.");
         } else {
-          alert("One of your sides is invalid.")
+          alert("One of your sides is invalid.");
         }
+
         sideOne = prompt("Side 1: ");
         sideTwo = prompt("Side 2: ");
         sideThree = prompt("Side 3: ");
@@ -141,6 +146,9 @@ const drawTriangle = function() {
 
     if ( base > 1024 || height > 512 || hypotenuse > 1144 ){
       alert("Your triangle won't fit on the canvas")
+      sideOne = prompt("Side 1: ");
+      sideTwo = prompt("Side 2: ");
+      sideThree = prompt("Side 3: ");
     }
     if ((height ** 2) + (base ** 2) == (hypotenuse ** 2)) {
       ctx.beginPath();
@@ -151,6 +159,9 @@ const drawTriangle = function() {
       ctx.stroke();
     } else {
       alert("That's not a valid right triangle.")
+      sideOne = prompt("Side 1: ");
+      sideTwo = prompt("Side 2: ");
+      sideThree = prompt("Side 3: ");
     }
 
   };
@@ -165,7 +176,7 @@ const drawFace = function() {
 
   let radius = prompt("Radius: ");
 
-  while(radius < 32 || isNaN(radius) || radius > (canvas.width / 2)){
+  while(radius < 32 || isNaN(radius) || radius > (512/ 2)){
     if (radius == null) {
       ctx.clearRect(0, 0, 1024, 512);
       return;
@@ -176,7 +187,7 @@ const drawFace = function() {
     if(isNaN(radius)){
       alert("Your radius is not a number.")
     }
-    if(radius > (canvas.width / 2)){
+    if(radius > (512/ 2)){
       alert("Your smiley face won't fit on the canvas.")
     }
     radius = prompt("Radius: ");
@@ -209,5 +220,45 @@ const drawFace = function() {
  */
 
 const drawPyramid = function() {
-    // write your exercise 5 code here
-};
+
+  const canvas = document.getElementById('student-canvas-6');
+  const ctx = canvas.getContext('2d');
+  var distance = 0
+  var heightOne = 0
+  var distanceChange = 0
+  var heightChange = 0
+  var counter = 5
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  do {
+    var side = (prompt("Side: "))
+    if (side == null) {
+      break;
+    }
+    if (side < 1) {
+      alert("The block size must be at least 1.")
+    }
+    if (side >= 101) {
+      alert("Your pyramid is too big.")
+    }
+    if (isNaN(side)) {
+      alert("Your side is invalid.")
+    }
+  } while (isNaN(side) || side >= 101 || side < 1)
+
+  for (i = 5; i > 0; i--) {
+    counter = i
+    while(counter >= 1) {
+      ctx.beginPath();
+      ctx.rect(10 + Number(distance), (502 - side) - Number(heightOne), Number(side), Number(side));
+      ctx.stroke();
+      ctx.closePath();
+      distance = Number(distance) + Number(side)
+      counter--
+    }
+    distanceChange++
+    distance = distanceChange * (1/2 * side)
+    heightChange++
+    heightOne = heightChange * side
+  }
+  };
